@@ -82,10 +82,11 @@ function IndexRow({
           {ach.image ? (
             <div
               className={cn(
-                'relative aspect-[4/3] w-full',
-                'transition-transform duration-500 group-hover:scale-[1.03]'
+                'relative aspect-[3/4] w-full',
+                'transition-transform duration-500 group-hover:scale-[1.03]',
+                'flex items-center justify-center'
               )}
-            >
+              >
               <Image
                 src={ach.image}
                 alt={ach.title}
