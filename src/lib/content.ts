@@ -194,7 +194,7 @@ export const achievements: Achievement[] = [
   },
   {
     id: 'a8',
-    year: '2025',
+    year: '2026',
     title: 'WorldQuant BRAIN Challenge — Gold Level',
     description:
       'Recognized for reaching Gold Level in the WorldQuant Challenge, a quantitative finance challenge testing algorithmic trading strategies and data science skills. Authorized and presented by Nitish Maini, CISO of WorldQuant.',
