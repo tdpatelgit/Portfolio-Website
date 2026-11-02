@@ -49,6 +49,8 @@ export interface ClothingRailHeroProps extends React.ComponentProps<"section"> {
   interval?: number;
   /** Drawn hanger. Use "none" when your photos already include a hanger with its hook at the top. */
   hanger?: "wood" | "matte" | "none";
+  /** Lets the detail view turn a piece around to show its back. Turn off when there is nothing on the back. */
+  flippable?: boolean;
   labels?: ClothingRailHeroLabels;
   onOpenChange?: (index: number | null) => void;
 }
@@ -532,6 +534,7 @@ export function ClothingRailHero({
   autoplay = false,
   interval = 2600,
   hanger = "wood",
+  flippable = true,
   labels = DEFAULT_LABELS,
   onOpenChange,
   className,
@@ -1050,6 +1053,7 @@ export function ClothingRailHero({
           index={openIndex}
           total={count}
           hanger={hanger}
+          flippable={flippable}
           labels={labels}
           reduced={reduced}
           source={() => turns.current[openIndex]?.getBoundingClientRect() ?? null}
@@ -1061,12 +1065,13 @@ export function ClothingRailHero({
   );
 }
 
-function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLift, onClose }: {
+function Detail({ uid, item, index, total, hanger, flippable, labels, reduced, source, onLift, onClose }: {
   uid: string;
   item: RailGarment;
   index: number;
   total: number;
   hanger: "wood" | "matte" | "none";
+  flippable: boolean;
   labels: ClothingRailHeroLabels;
   reduced: boolean;
   source: () => DOMRect | null;
@@ -1160,16 +1165,16 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
       const dialog = dialogRef.current;
       if (!dialog || dialog.contains(event.target as Node)) return;
       if (event.key === "Escape") { event.preventDefault(); dismiss(); }
-      else if (event.key === "ArrowLeft" || event.key === "ArrowRight") turnTo(side === "front" ? "back" : "front");
+      else if (flippable && (event.key === "ArrowLeft" || event.key === "ArrowRight")) turnTo(side === "front" ? "back" : "front");
       else if (event.key === "Tab") { const first = dialog.querySelector("button"); if (first) { event.preventDefault(); first.focus(); } }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [dismiss, turnTo, side]);
+  }, [dismiss, turnTo, side, flippable]);
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Escape") { event.preventDefault(); dismiss(); return; }
-    if (event.key === "ArrowLeft" || event.key === "ArrowRight") { turnTo(side === "front" ? "back" : "front"); return; }
+    if (flippable && (event.key === "ArrowLeft" || event.key === "ArrowRight")) { turnTo(side === "front" ? "back" : "front"); return; }
     if (event.key !== "Tab") return;
     const controls = Array.from(dialogRef.current?.querySelectorAll("button") ?? []).filter((node) => !node.disabled);
     const first = controls[0];
@@ -1183,9 +1188,9 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
     <div ref={figureRef} className="relative mx-auto aspect-[200/310] h-[min(62vh,560px)] max-h-full origin-top">
       <div aria-hidden="true" className="absolute left-1/2 top-[-40vh] h-[40vh] w-[3px] -translate-x-1/2 rounded-full" style={{ background: "linear-gradient(to right, color-mix(in oklab, var(--color-muted-foreground) 50%, white), var(--color-muted-foreground), color-mix(in oklab, var(--color-muted-foreground) 50%, black))", top: `calc(-40vh + ${(HOOK_TOP / VB_H) * 100}%)` }} />
       <div
-        className="absolute inset-0 cursor-grab touch-pan-y active:cursor-grabbing"
+        className={`absolute inset-0 ${flippable ? "cursor-grab touch-pan-y active:cursor-grabbing" : ""}`}
         style={{ perspective: "1400px" }}
-        onPointerDown={(event) => { const a = angle.current; a.dragging = true; a.startX = event.clientX; a.startAngle = a.value; cancelAnimationFrame(a.raf); a.raf = 0; a.last = 0; event.currentTarget.setPointerCapture(event.pointerId); }}
+        onPointerDown={(event) => { if (!flippable) return; const a = angle.current; a.dragging = true; a.startX = event.clientX; a.startAngle = a.value; cancelAnimationFrame(a.raf); a.raf = 0; a.last = 0; event.currentTarget.setPointerCapture(event.pointerId); }}
         onPointerMove={(event) => { const a = angle.current; if (!a.dragging) return; a.value = clamp(a.startAngle + (event.clientX - a.startX) * 0.45, a.startAngle - 220, a.startAngle + 220); if (spinRef.current) spinRef.current.style.transform = `rotateY(${a.value.toFixed(2)}deg)`; }}
         onPointerUp={() => { const a = angle.current; if (!a.dragging) return; a.dragging = false; const facing = (((a.value % 360) + 360) % 360); turnTo(facing > 90 && facing < 270 ? "back" : "front"); }}
         onPointerCancel={() => { angle.current.dragging = false; turnTo(side); }}
@@ -1222,14 +1227,14 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
               {item.details.map((detail) => <li key={detail} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{detail}</li>)}
             </ul>
           )}
-          <div role="group" aria-label={`${labels.front} / ${labels.back}`} className="mt-2 inline-flex justify-center gap-6 md:justify-start">
+          {flippable && <div role="group" aria-label={`${labels.front} / ${labels.back}`} className="mt-2 inline-flex justify-center gap-6 md:justify-start">
             {(["front", "back"] as const).map((face) => (
               <button key={face} type="button" aria-pressed={side === face} onClick={() => turnTo(face)} className={`relative pb-1.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring ${side === face ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
                 {face === "front" ? labels.front : labels.back}
                 <span aria-hidden="true" className={`absolute inset-x-0 bottom-0 h-px origin-left bg-foreground transition-transform duration-300 motion-reduce:transition-none ${side === face ? "scale-x-100" : "scale-x-0"}`} />
               </button>
             ))}
-          </div>
+          </div>}
         </div>
       </div>
     </div>,

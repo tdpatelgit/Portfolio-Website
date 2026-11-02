@@ -20,6 +20,7 @@ export function CertificateRail() {
     <ClothingRailHero
       items={items}
       hanger="wood"
+      flippable={false}
       eyebrow="Certificates · Hover, drag, click to lift"
       caption="Brush along the rail, slide a certificate, click one to look closer."
       autoplay
