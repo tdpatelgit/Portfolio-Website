@@ -22,6 +22,10 @@ export interface Achievement {
   title: string;
   description: string;
   image?: string;
+  /** Discipline shown on the rail hang-tag, e.g. AI, CP, Web. */
+  field: string;
+  /** Competitive scope shown on the rail hang-tag, e.g. National, International. */
+  level: string;
 }
 
 export interface Flagship {
@@ -139,6 +143,8 @@ export const achievements: Achievement[] = [
   {
     id: 'a1',
     year: '2022',
+    field: 'CP',
+    level: 'International',
     title: 'ICode Global Hackathon — South Asia Qualifiers',
     description:
       'Ranked 46th out of 2,000 students in the Python Advance category during the South Asia Qualifiers round of the ICode Global Hackathon 2022.',
@@ -147,6 +153,8 @@ export const achievements: Achievement[] = [
   {
     id: 'a2',
     year: '2022',
+    field: 'CP',
+    level: 'International',
     title: 'ICode Global Hackathon — Finals',
     description:
       'Advanced through to the ICode Global Hackathon 2022 Finals and ranked 29th out of 800 students in the Python Advance category.',
@@ -155,6 +163,8 @@ export const achievements: Achievement[] = [
   {
     id: 'a3',
     year: '2023',
+    field: 'AI',
+    level: 'International',
     title: 'Intel AI Global Impact Festival — Participant',
     description:
       'Participated in "Integrating AI and Tinkering with Pedagogy," a session held under the Intel AI Global Impact Festival, in association with G20 and AIM NITI Aayog.',
@@ -163,6 +173,8 @@ export const achievements: Achievement[] = [
   {
     id: 'a4',
     year: '2023',
+    field: 'AI',
+    level: 'International',
     title: 'Intel AI Global Impact Festival — Demystifying Intel Dev Cloud',
     description:
       'Completed the "Demystifying Intel Dev Cloud" micro-learning module under the Intel AI Global Impact Festival 2023.',
@@ -171,6 +183,8 @@ export const achievements: Achievement[] = [
   {
     id: 'a5',
     year: '2023',
+    field: 'Web',
+    level: 'International',
     title: 'Intel AI Global Impact Festival — Introduction to Web 3.0',
     description:
       'Completed the "Introduction to Web 3.0" micro-learning module under the Intel AI Global Impact Festival 2023.',
@@ -179,6 +193,8 @@ export const achievements: Achievement[] = [
   {
     id: 'a6',
     year: '2024',
+    field: 'Innovation',
+    level: 'State',
     title: 'Ideathon \'23 — Top 25, Youth Leadership Summit',
     description:
       'Recognised as Top 25 at Ideathon \'23, a pioneering student innovation initiative under Brand Bengaluru\'s Inter-School Challenge. Citation awarded at the first Youth Leadership Summit in Bengaluru (January 13, 2024) — attended by D.K. Shivakumar (Deputy CM, Karnataka), Padma Bhushan Sudha Murthy, and actor Ramesh Aravind.',
@@ -187,6 +203,8 @@ export const achievements: Achievement[] = [
   {
     id: 'a7',
     year: '2026',
+    field: 'CP',
+    level: 'University',
     title: 'CodeRush 2026 — Winner',
     description:
       'Winner of CodeRush 2026, the Competitive Programming Challenge organised by Cluster One Technical Association at the School of Engineering and Technology, S-VYASA (Deemed to be University). Held on 11 September 2026.',
@@ -195,6 +213,8 @@ export const achievements: Achievement[] = [
   {
     id: 'a8',
     year: '2026',
+    field: 'Quant',
+    level: 'International',
     title: 'WorldQuant BRAIN Challenge — Gold Level',
     description:
       'Recognized for reaching Gold Level in the WorldQuant Challenge, a quantitative finance challenge testing algorithmic trading strategies and data science skills. Authorized and presented by Nitish Maini, CISO of WorldQuant.',

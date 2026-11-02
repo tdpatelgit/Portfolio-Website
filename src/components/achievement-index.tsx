@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { achievements } from '@/lib/content';
 import { cn } from '@/lib/utils';
+import { CertificateRail } from '@/components/ui/certificate-rail';
 
 export function AchievementIndex() {
   return (
@@ -26,6 +27,8 @@ export function AchievementIndex() {
             </p>
           </div>
         </div>
+
+        <CertificateRail />
 
         {/* Editorial index rows */}
         <ol className="divide-y divide-border">
