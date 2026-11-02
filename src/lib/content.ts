@@ -201,6 +201,16 @@ export const achievements: Achievement[] = [
     image: '/certificates/cutouts/ideathon-2023.png',
   },
   {
+    id: 'a9',
+    year: '2024',
+    field: 'Game Dev',
+    level: 'Global',
+    title: 'Unity Junior Programmer — Pathway Badge',
+    description:
+      'Completed all 8 missions of Unity\'s Junior Programmer pathway on May 7, 2024, earning the Credly-issued Pathway Badge. Across Unity Learn: 13,445 XP, 9 badges and 133 completed items, with Programming at Level 5.',
+    image: '/certificates/cutouts/unity-junior-programmer.png',
+  },
+  {
     id: 'a7',
     year: '2026',
     field: 'CP',
