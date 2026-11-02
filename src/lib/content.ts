@@ -231,3 +231,10 @@ export const achievements: Achievement[] = [
     image: '/certificates/cutouts/worldquant-gold.png',
   },
 ];
+
+/** Contact links; any left empty are hidden on the page. */
+export const contact = {
+  github: 'https://github.com/tdpatelgit',
+  linkedin: '',
+  email: '',
+};

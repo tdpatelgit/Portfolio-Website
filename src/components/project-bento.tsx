@@ -17,7 +17,7 @@ export function ProjectBento() {
       <span className="mb-3 inline-block font-mono text-xs uppercase tracking-widest text-muted-foreground">
         // Satellite work
       </span>
-      <h2 className="mb-2 text-3xl font-bold tracking-tight">Other Systems</h2>
+      <h2 className="mb-2 text-3xl font-bold tracking-tight md:text-4xl">Other Systems</h2>
       <p className="mb-12 text-muted-foreground">
         Smaller, self-contained projects and experiments running alongside the flagships.
       </p>

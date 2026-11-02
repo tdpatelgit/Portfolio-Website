@@ -4,6 +4,7 @@ import { Flagships } from '@/components/flagships';
 import { ProjectBento } from '@/components/project-bento';
 import { IntelligencePorts } from '@/components/intelligence-ports';
 import { AchievementIndex } from '@/components/achievement-index';
+import { Contact, SiteFooter } from '@/components/contact';
 
 export default function Home() {
   return (
@@ -14,10 +15,9 @@ export default function Home() {
       <ProjectBento />
       <IntelligencePorts />
       <AchievementIndex />
+      <Contact />
 
-      <footer className="border-t border-border py-12 text-center font-mono text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} ARCHITECT.T // ALL SYSTEMS OPERATIONAL</p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

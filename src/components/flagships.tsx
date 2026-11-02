@@ -76,9 +76,9 @@ function FlagshipCard({ flagship, index }: { flagship: Flagship; index: number }
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={cn(
         'group relative overflow-hidden rounded-3xl border border-border bg-card p-8 ring-1 md:p-12',

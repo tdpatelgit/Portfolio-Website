@@ -11,7 +11,10 @@ export function IntelligencePorts() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="mb-2 text-3xl font-bold tracking-tight">Intelligence Ports</h2>
+            <span className="mb-3 inline-block font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              // Automations
+            </span>
+            <h2 className="mb-2 text-3xl font-bold tracking-tight md:text-4xl">Intelligence Ports</h2>
             <p className="max-w-md text-muted-foreground">
               Active automation interfaces bridging disparate data streams.
             </p>
