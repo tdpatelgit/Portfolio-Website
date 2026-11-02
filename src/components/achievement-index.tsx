@@ -1,9 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { achievements } from '@/lib/content';
-import { cn } from '@/lib/utils';
 import { CertificateRail } from '@/components/ui/certificate-rail';
 
 export function AchievementIndex() {
@@ -29,80 +26,7 @@ export function AchievementIndex() {
         </div>
 
         <CertificateRail />
-
-        {/* Editorial index rows */}
-        <ol className="divide-y divide-border">
-          {achievements.map((ach, idx) => (
-            <IndexRow key={ach.id} ach={ach} idx={idx} />
-          ))}
-        </ol>
       </div>
     </section>
-  );
-}
-
-function IndexRow({
-  ach,
-  idx,
-}: {
-  ach: (typeof achievements)[number];
-  idx: number;
-}) {
-  const num = String(idx + 1).padStart(2, '0');
-  return (
-    <motion.li
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="group relative py-10 md:py-14"
-    >
-      <div className="grid grid-cols-12 gap-4 md:gap-8">
-        {/* Number column */}
-        <div className="col-span-2 md:col-span-1">
-          <span className="font-mono text-sm text-muted-foreground">Nº {num}</span>
-        </div>
-
-        {/* Year column */}
-        <div className="col-span-3 md:col-span-2">
-          <span className="font-serif text-3xl leading-none md:text-5xl">
-            {ach.year}
-          </span>
-        </div>
-
-        {/* Title + description column */}
-        <div className="col-span-7 md:col-span-6">
-          <h3 className="mb-2 font-serif text-xl leading-tight md:text-2xl">
-            {ach.title}
-          </h3>
-          <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-            {ach.description}
-          </p>
-        </div>
-
-        {/* Image column — full-bleed thumbnail */}
-        <div className="col-span-12 md:col-span-3">
-          {ach.image ? (
-            <div
-              className={cn(
-                'relative aspect-[3/4] w-full',
-                'transition-transform duration-500 group-hover:scale-[1.03]',
-                'flex items-center justify-center'
-              )}
-              >
-              <Image
-                src={ach.image}
-                alt={ach.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 260px"
-                className="object-contain"
-              />
-            </div>
-          ) : (
-            <div className="aspect-[4/3] w-full bg-muted" />
-          )}
-        </div>
-      </div>
-    </motion.li>
   );
 }
