@@ -192,4 +192,12 @@ export const achievements: Achievement[] = [
       'Winner of CodeRush 2026, the Competitive Programming Challenge organised by Cluster One Technical Association at the School of Engineering and Technology, S-VYASA (Deemed to be University). Held on 11 September 2026.',
     image: '/certificates/cutouts/coderush-2026.png',
   },
+  {
+    id: 'a8',
+    year: '2025',
+    title: 'WorldQuant BRAIN Challenge — Gold Level',
+    description:
+      'Recognized for reaching Gold Level in the WorldQuant Challenge, a quantitative finance challenge testing algorithmic trading strategies and data science skills. Authorized and presented by Nitish Maini, CISO of WorldQuant.',
+    image: '/certificates/cutouts/worldquant-gold.png',
+  },
 ];
